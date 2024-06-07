@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { InvestmentService } from './investment-results/investment.service';
 import {
   InvestmentInput,
@@ -7,14 +7,15 @@ import {
 
 @Component({
   selector: 'app-root',
-  standalone: false,
-  templateUrl: './app.component.html',
+  templateUrl: './app.component.html', // Pointing to the HTML template file
 })
 export class AppComponent {
   private _investmentService = new InvestmentService();
-  resultData?: InvestmentResult[];
+  resultData = signal<InvestmentResult[] | undefined>(undefined);
 
   onCalculator(data: InvestmentInput) {
-    this.resultData = this._investmentService.calculateInvestmentResults(data);
+    this.resultData.set(
+      this._investmentService.calculateInvestmentResults(data)
+    );
   }
 }

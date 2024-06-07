@@ -1,3 +1,3 @@
-<app-header />
-<app-user-input (calculator)="onCalculator($event)" />
-<app-investment-results [results]="resultData" />
+<app-header></app-header>
+<app-user-input (calculate)="onCalculator($event)"></app-user-input>
+<app-investment-results [results]="resultData()"></app-investment-results>
